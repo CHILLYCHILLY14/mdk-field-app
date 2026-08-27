@@ -152,6 +152,13 @@ input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left
   input, select, textarea { font-size: 16px; }
 }
 
+@media (max-width: 959px) and (display-mode: browser) {
+  @supports (-webkit-touch-callout: none) {
+    .shell { padding-bottom: 76px; }
+    .toast { bottom: calc(162px + env(safe-area-inset-bottom)); }
+  }
+}
+
 @media (min-width: 960px) {
   .shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); }
   .sidebar { display: flex; position: sticky; top: 0; height: 100vh; padding: 26px 16px; border-right: 1px solid var(--line); background: #07131ed9; flex-direction: column; }
