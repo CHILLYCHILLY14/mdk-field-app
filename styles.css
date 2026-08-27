@@ -147,13 +147,13 @@ input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left
 }
 
 @media (max-width: 959px) {
-  html, body, #app { min-height: 100%; height: auto; overflow-x: hidden; }
+  html, body, #app { min-height: 100%; height: auto; overflow-x: hidden; overscroll-behavior-y: none; }
   body { min-height: 100vh; min-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .shell { min-height: 100vh; min-height: 100dvh; height: auto; display: block; overflow: visible; }
   .main { min-height: 100vh; min-height: 100dvh; overflow: visible; touch-action: pan-y; padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
   .form-stack, .form-section, .line-row { touch-action: pan-y; }
   .editor-head, .form-section h2, .line-row-head, .field > span { -webkit-user-select: none; user-select: none; }
-  .bottom-nav { position: fixed !important; z-index: 100; inset: auto 0 0; width: 100%; transform: translateZ(0); }
+  .bottom-nav { position: fixed !important; z-index: 100; inset: auto 0 0; width: 100%; transform: translate3d(0, 0, 0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
   input, select, textarea { font-size: 16px; }
 }
 
@@ -163,6 +163,12 @@ input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left
     .bottom-nav { bottom: 76px; }
     .toast { bottom: calc(162px + env(safe-area-inset-bottom)); }
   }
+}
+
+@media (max-width: 959px) {
+  html.is-embedded .main { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
+  html.is-embedded .bottom-nav { bottom: 0; }
+  html.is-embedded .toast { bottom: calc(86px + env(safe-area-inset-bottom)); }
 }
 
 @media (min-width: 960px) {
