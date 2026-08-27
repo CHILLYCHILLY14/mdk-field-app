@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --check app.js && node --check data.js && node --check pdf.js && node --check sw.js",
+    "test": "node --check app.js && node --check data.js && node --check pdf.js && node --check sw.js && node tests.mjs",
     "serve": "python3 -m http.server 4173"
   }
 }
