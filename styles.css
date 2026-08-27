@@ -97,8 +97,11 @@ input, select, textarea { display: block; width: 100%; min-width: 0; max-width: 
 input:focus, select:focus, textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px #20d5ff1a; }
 textarea { min-height: 112px; resize: vertical; }
 input[type="checkbox"] { width: 22px; min-height: 22px; accent-color: var(--cyan); }
-input[type="date"] { width: 100% !important; min-width: 0 !important; max-width: 100% !important; inline-size: 100%; min-inline-size: 0; -webkit-min-logical-width: 0; }
+input[type="date"] { width: 100% !important; min-width: 0 !important; max-width: 100% !important; inline-size: 100% !important; min-inline-size: 0 !important; max-inline-size: 100% !important; -webkit-min-logical-width: 0; }
 input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left; }
+.date-field { max-width: 100%; overflow: hidden; }
+.date-input { -webkit-appearance: none; appearance: none; overflow: hidden; }
+.date-input::-webkit-calendar-picker-indicator { flex: 0 0 auto; margin: 0; padding: 0; }
 .check-field { display: flex; align-items: center; gap: 10px; color: var(--text); }
 .check-field span { color: var(--text); }
 .row-list { display: grid; gap: 10px; }

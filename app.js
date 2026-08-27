@@ -141,7 +141,9 @@ function recordCard(type, doc, actions) {
 }
 
 function input(label, path, value, type = "text", attrs = "") {
-  return `<label class="field"><span>${label}</span><input type="${type}" data-path="${path}" value="${esc(value)}" ${attrs}></label>`;
+  const dateClass = type === "date" ? " date-field" : "";
+  const inputClass = type === "date" ? ' class="date-input"' : "";
+  return `<label class="field${dateClass}"><span>${label}</span><input${inputClass} type="${type}" data-path="${path}" value="${esc(value)}" ${attrs}></label>`;
 }
 
 function textarea(label, path, value, attrs = "") {
