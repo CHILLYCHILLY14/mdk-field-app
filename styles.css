@@ -88,15 +88,17 @@ h1 { margin-bottom: 2px; font-size: clamp(1.55rem, 5vw, 2.35rem); line-height: 1
 .editor-title h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .editor-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .form-stack { display: grid; gap: 14px; }
-.form-section { padding: 16px; }
+.form-section { min-width: 0; padding: 16px; }
 .form-section h2 { font-size: .96rem; color: var(--cyan); letter-spacing: .04em; margin-bottom: 15px; }
-.fields { display: grid; gap: 12px; }
+.fields { display: grid; min-width: 0; gap: 12px; }
 .field { display: grid; gap: 6px; min-width: 0; }
 .field > span { color: var(--muted); font-size: .77rem; font-weight: 700; }
-input, select, textarea { width: 100%; border: 1px solid var(--line); background: #07131f; color: var(--text); min-height: 45px; border-radius: 11px; padding: 10px 12px; outline: none; }
+input, select, textarea { display: block; width: 100%; min-width: 0; max-width: 100%; border: 1px solid var(--line); background: #07131f; color: var(--text); min-height: 45px; border-radius: 11px; padding: 10px 12px; outline: none; }
 input:focus, select:focus, textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px #20d5ff1a; }
 textarea { min-height: 112px; resize: vertical; }
 input[type="checkbox"] { width: 22px; min-height: 22px; accent-color: var(--cyan); }
+input[type="date"] { width: 100% !important; min-width: 0 !important; max-width: 100% !important; inline-size: 100%; min-inline-size: 0; -webkit-min-logical-width: 0; }
+input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left; }
 .check-field { display: flex; align-items: center; gap: 10px; color: var(--text); }
 .check-field span { color: var(--text); }
 .row-list { display: grid; gap: 10px; }
@@ -104,7 +106,7 @@ input[type="checkbox"] { width: 22px; min-height: 22px; accent-color: var(--cyan
 .line-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .line-row-head strong { color: #d7e6f2; }
 .quick-hours { min-height: 36px; padding: 6px 13px; color: var(--cyan); border-color: #27617a; background: #0b2737; }
-.row-fields { display: grid; gap: 10px; }
+.row-fields { display: grid; min-width: 0; gap: 10px; }
 .row-fields.timesheet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .row-fields.timesheet .field:nth-child(-n+2) { grid-column: 1 / -1; }
 .section-add { margin-top: 12px; width: 100%; }
@@ -139,6 +141,15 @@ input[type="checkbox"] { width: 22px; min-height: 22px; accent-color: var(--cyan
   .editor-head { flex-wrap: wrap; }
   .editor-actions { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .editor-actions .button { padding-inline: 8px; font-size: .82rem; }
+}
+
+@media (max-width: 959px) {
+  html, body, #app { height: 100%; overflow: hidden; }
+  body { min-height: 0; }
+  .shell { height: 100vh; height: 100svh; height: 100dvh; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .main { flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; padding-bottom: 28px; }
+  .bottom-nav { position: relative !important; z-index: 100; inset: auto; flex: 0 0 auto; transform: none; }
+  input, select, textarea { font-size: 16px; }
 }
 
 @media (min-width: 960px) {

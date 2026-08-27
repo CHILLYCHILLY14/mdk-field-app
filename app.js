@@ -321,7 +321,9 @@ app.addEventListener("click", async event => {
     const index = Number(setEight.dataset.setEight);
     if (ui.editingType === "timesheets" && ui.editing.entries[index]) {
       ui.editing.entries[index].regularHours = 8;
-      render();
+      const hoursInput = document.querySelector(`[data-path="entries.${index}.regularHours"]`);
+      if (hoursInput) hoursInput.value = "8";
+      updateTotals();
       showToast(`${displayDate(ui.editing.entries[index].date)} set to 8 regular hours.`);
     }
     return;

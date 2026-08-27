@@ -13,8 +13,11 @@ Set the link to open in a new tab. This gives the app the full phone screen and 
 1. In the Wix editor, choose **Add Elements → Embed Code → Embed a Site**.
 2. Enter the GitHub Pages URL above.
 3. Stretch the embed to the full available width.
-4. Use a height of at least `800px` on desktop and `720px` on mobile.
-5. Preview both breakpoints and publish.
+4. On mobile, set the embed to a fixed viewport height (about `760px` to `900px`, depending on the Wix section) and turn off **auto height**, **fit to content**, or any setting that expands the frame to the app's full document height. The app scrolls inside the frame so its bottom menu can stay visible.
+5. Use a height of at least `800px` on desktop.
+6. Preview both breakpoints and publish.
+
+If the Wix embed is allowed to grow to the full form height, a menu inside it cannot attach itself to the phone's browser viewport. Keeping the frame viewport-sized, or opening the app full screen, is required for a genuinely fixed mobile menu.
 
 Some mobile browsers restrict file sharing inside an embedded frame. Keep an **Open full screen** button beside the embed so staff can use PDF sharing without that restriction.
 
