@@ -1,4 +1,4 @@
-const CACHE = "mdk-field-v2";
+const CACHE = "mdk-field-v3";
 const APP_SHELL = [
   "./", "./index.html", "./styles.css", "./app.js", "./data.js", "./pdf.js",
   "./manifest.webmanifest", "./assets/mdk-logo.jpg", "./assets/icons/icon-192.png",

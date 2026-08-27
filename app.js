@@ -41,12 +41,12 @@ function navButton(view, label, side = false) {
 function shell(content) {
   return `<div class="shell">
     <aside class="sidebar" aria-label="Main navigation">
-      <div class="side-brand"><img class="brand-mark" src="./assets/mdk-logo.jpg" alt=""><div><strong>MDK Field</strong><small>MDK ELECTRIC</small></div></div>
+      <div class="side-brand"><div><strong>MDK Field</strong><small>MDK ELECTRIC</small></div></div>
       <nav class="side-nav">${navItems.map(([view, label]) => navButton(view, label, true)).join("")}</nav>
       <div class="side-foot">Private browser storage<br><span id="connection-status">${navigator.onLine ? "Online" : "Offline ready"}</span></div>
     </aside>
     <main class="main" id="main">
-      ${ui.editing ? "" : `<header class="topbar"><img class="brand-mark" src="./assets/mdk-logo.jpg" alt="MDK Electric logo"><div><div class="eyebrow">MDK ELECTRIC</div><h1>${esc(pageTitle())}</h1></div><div class="topbar-actions">${installPrompt ? '<button class="button ghost" data-action="install">Install</button>' : ""}</div></header>`}
+      ${ui.editing ? "" : `<header class="topbar"><div><div class="eyebrow">MDK ELECTRIC</div><h1>${esc(pageTitle())}</h1></div><div class="topbar-actions">${installPrompt ? '<button class="button ghost" data-action="install">Install</button>' : ""}</div></header>`}
       ${content}
     </main>
     <nav class="bottom-nav" aria-label="Main navigation">${navItems.map(([view, label]) => navButton(view, label)).join("")}</nav>
