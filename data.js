@@ -19,12 +19,19 @@ export const defaultSettings = {
   staffNames: ["Kevin", "Dustin", "Mike", "Justin", "Michael", "Neill", "Cal", "Noah", "Josh", "Anthony", "Patrick", "Scott"],
 };
 
-const today = () => new Date().toISOString().slice(0, 10);
+const localIsoDate = date => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+const today = () => localIsoDate(new Date());
 const id = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 const plusDays = (dateString, days) => {
-  const d = new Date(`${dateString}T12:00:00`);
+  const [year, month, day] = dateString.split("-").map(Number);
+  const d = new Date(year, month - 1, day, 12);
   d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
+  return localIsoDate(d);
 };
 
 export function initialState() {
