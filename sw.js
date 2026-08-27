@@ -1,6 +1,6 @@
-const CACHE = "mdk-field-v8";
+const CACHE = "mdk-field-v9";
 const APP_SHELL = [
-  "./", "./index.html", "./styles.css", "./app.js", "./data.js", "./pdf.js",
+  "./", "./index.html", "./styles.css?v=9", "./app.js?v=9", "./data.js", "./pdf.js",
   "./manifest.webmanifest", "./assets/mdk-logo.jpg", "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png", "./vendor/jspdf.umd.min.js"
 ];
