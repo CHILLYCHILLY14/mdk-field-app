@@ -31,6 +31,24 @@ function count() { return state.workOrders.length + state.timesheets.length + st
 function number(value) { return Number(value) || 0; }
 function percent(value) { return `${(number(value) * 100).toFixed(1)}%`; }
 
+function isoDayNumber(value) {
+  const parts = String(value || "").split("-").map(Number);
+  if (parts.length !== 3 || parts.some(part => !Number.isFinite(part))) return NaN;
+  return Date.UTC(parts[0], parts[1] - 1, parts[2]) / 86_400_000;
+}
+
+function shiftIsoDate(value, days) {
+  const dayNumber = isoDayNumber(value);
+  if (!Number.isFinite(dayNumber)) return value;
+  return new Date((dayNumber + days) * 86_400_000).toISOString().slice(0, 10);
+}
+
+function shiftTimesheetWeek(doc, oldWeekEnding, newWeekEnding) {
+  const difference = Math.round(isoDayNumber(newWeekEnding) - isoDayNumber(oldWeekEnding));
+  if (!Number.isFinite(difference) || difference === 0) return;
+  doc.entries.forEach(entry => { entry.date = shiftIsoDate(entry.date, difference); });
+}
+
 function navButton(view, label, side = false) {
   const active = ui.view === view && !ui.editing;
   return `<button class="nav-button${active ? " active" : ""}" data-nav="${view}" aria-label="${label}"${active ? ' aria-current="page"' : ""}>
@@ -340,8 +358,15 @@ app.addEventListener("input", event => {
   if (target.matches("[data-path]") && ui.editing) {
     const path = target.dataset.path;
     if (!path) return;
+    const oldWeekEnding = path === "weekEnding" ? ui.editing.weekEnding : null;
     const value = target.type === "checkbox" ? target.checked : target.type === "number" ? number(target.value) : target.value;
     setPath(ui.editing, path, value);
+    if (path === "weekEnding" && ui.editingType === "timesheets") {
+      shiftTimesheetWeek(ui.editing, oldWeekEnding, value);
+      render();
+      showToast(`Daily entries moved to the week ending ${displayDate(value)}.`);
+      return;
+    }
     if (target.type === "checkbox" || path === "currencyCode") render(); else updateTotals();
     return;
   }
