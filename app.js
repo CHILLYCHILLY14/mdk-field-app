@@ -405,7 +405,15 @@ window.addEventListener("online", () => { const node = document.querySelector("#
 window.addEventListener("offline", () => { const node = document.querySelector("#connection-status"); if (node) node.textContent = "Offline ready"; });
 
 if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+  window.addEventListener("load", () => {
+    if (window.self !== window.top) {
+      navigator.serviceWorker.getRegistrations()
+        .then(registrations => Promise.all(registrations.map(registration => registration.unregister())))
+        .catch(() => {});
+      return;
+    }
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
 }
 
 render();
