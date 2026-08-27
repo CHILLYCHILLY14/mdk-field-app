@@ -104,6 +104,7 @@ input[type="checkbox"] { width: 22px; min-height: 22px; accent-color: var(--cyan
 .line-row { padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: #07131fa8; }
 .line-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .line-row-head strong { color: #d7e6f2; }
+.quick-hours { min-height: 36px; padding: 6px 13px; color: var(--cyan); border-color: #27617a; background: #0b2737; }
 .row-fields { display: grid; gap: 10px; }
 .section-add { margin-top: 12px; width: 100%; }
 .totals { display: grid; gap: 9px; margin-left: auto; max-width: 420px; }

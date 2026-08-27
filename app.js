@@ -170,7 +170,7 @@ function workOrderTotalHtml(totals) {
 function timesheetEditor(doc) {
   const totals = timesheetTotals(doc);
   return `<section class="form-section card span-two"><h2>Timesheet details</h2><div class="fields three">${commonDocumentFields(doc)}${select("Employee", "employee", doc.employee, ["", ...state.settings.staffNames])}${input("Week ending", "weekEnding", doc.weekEnding, "date")}</div></section>
-    <section class="form-section card span-two"><h2>Daily entries</h2><div class="row-list">${doc.entries.map((row, i) => `<div class="line-row"><div class="line-row-head"><strong>${displayDate(row.date)}</strong></div><div class="row-fields timesheet">${input("Date", `entries.${i}.date`, row.date, "date")}${input("Customer / PO", `entries.${i}.customerPO`, row.customerPO)}${input("Job description", `entries.${i}.jobDescription`, row.jobDescription)}${input("Reg", `entries.${i}.regularHours`, row.regularHours, "number", 'step="0.25" inputmode="decimal"')}${input("1.5x", `entries.${i}.overtimeHours`, row.overtimeHours, "number", 'step="0.25" inputmode="decimal"')}${input("2x", `entries.${i}.doubleTimeHours`, row.doubleTimeHours, "number", 'step="0.25" inputmode="decimal"')}${input("Expenses", `entries.${i}.expenses`, row.expenses, "number", 'step="0.01" inputmode="decimal"')}</div></div>`).join("")}</div></section>
+    <section class="form-section card span-two"><h2>Daily entries</h2><div class="row-list">${doc.entries.map((row, i) => `<div class="line-row"><div class="line-row-head"><strong>${displayDate(row.date)}</strong><button type="button" class="button quick-hours" data-set-eight="${i}">Set 8h</button></div><div class="row-fields timesheet">${input("Date", `entries.${i}.date`, row.date, "date")}${input("Customer / PO", `entries.${i}.customerPO`, row.customerPO)}${input("Job description", `entries.${i}.jobDescription`, row.jobDescription)}${input("Reg", `entries.${i}.regularHours`, row.regularHours, "number", 'step="0.25" inputmode="decimal"')}${input("1.5x", `entries.${i}.overtimeHours`, row.overtimeHours, "number", 'step="0.25" inputmode="decimal"')}${input("2x", `entries.${i}.doubleTimeHours`, row.doubleTimeHours, "number", 'step="0.25" inputmode="decimal"')}${input("Expenses", `entries.${i}.expenses`, row.expenses, "number", 'step="0.01" inputmode="decimal"')}</div></div>`).join("")}</div></section>
     <section class="form-section card"><h2>Sign-off</h2><div class="fields">${input("Signature name", "signatureName", doc.signatureName)}${input("Signed date", "signedDate", doc.signedDate, "date")}${textarea("Notes", "notes", doc.notes)}</div></section>
     <section class="form-section card"><h2>Totals</h2><div class="totals" data-totals>${timesheetTotalHtml(totals)}</div></section>`;
 }
@@ -298,6 +298,16 @@ app.addEventListener("click", async event => {
   if (remove) { ui.editing[remove.dataset.remove].splice(Number(remove.dataset.index), 1); render(); return; }
   const add = event.target.closest("[data-add]");
   if (add) return addRow(add.dataset.add);
+  const setEight = event.target.closest("[data-set-eight]");
+  if (setEight) {
+    const index = Number(setEight.dataset.setEight);
+    if (ui.editingType === "timesheets" && ui.editing.entries[index]) {
+      ui.editing.entries[index].regularHours = 8;
+      render();
+      showToast(`${displayDate(ui.editing.entries[index].date)} set to 8 regular hours.`);
+    }
+    return;
+  }
   const deletion = event.target.closest("[data-delete]");
   if (deletion) {
     const type = deletion.dataset.delete;

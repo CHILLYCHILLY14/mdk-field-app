@@ -5,9 +5,9 @@ A mobile-first web version of the MDK Electric field app. It creates and manages
 ## What it includes
 
 - Work orders with materials, labour, expenses, totals, HST, authorization, and notes
-- Weekly timesheets with regular, 1.5×, and 2× hours plus expenses
+- Weekly timesheets with one-tap **Set 8h** buttons, regular, 1.5×, and 2× hours, plus expenses
 - Quotes with billing/shipping addresses, line items, discounts, tax, and CAD/USD totals
-- Branded PDF download and mobile share-sheet support
+- Reference-style branded PDFs with the MDK logo, blue tables, totals, signatures, download, and mobile sharing
 - Automatic document numbering and editable company defaults
 - Search, edit, status tracking, and confirmed deletion
 - Full JSON backup export and restore
