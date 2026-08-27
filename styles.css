@@ -147,17 +147,20 @@ input[type="date"]::-webkit-date-and-time-value { min-width: 0; text-align: left
 }
 
 @media (max-width: 959px) {
-  html, body, #app { height: 100%; overflow: hidden; }
-  body { min-height: 0; }
-  .shell { height: 100vh; height: 100svh; height: 100dvh; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
-  .main { flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; padding-bottom: 28px; }
-  .bottom-nav { position: relative !important; z-index: 100; inset: auto; flex: 0 0 auto; transform: none; }
+  html, body, #app { min-height: 100%; height: auto; overflow-x: hidden; }
+  body { min-height: 100vh; min-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .shell { min-height: 100vh; min-height: 100dvh; height: auto; display: block; overflow: visible; }
+  .main { min-height: 100vh; min-height: 100dvh; overflow: visible; touch-action: pan-y; padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
+  .form-stack, .form-section, .line-row { touch-action: pan-y; }
+  .editor-head, .form-section h2, .line-row-head, .field > span { -webkit-user-select: none; user-select: none; }
+  .bottom-nav { position: fixed !important; z-index: 100; inset: auto 0 0; width: 100%; transform: translateZ(0); }
   input, select, textarea { font-size: 16px; }
 }
 
 @media (max-width: 959px) and (display-mode: browser) {
   @supports (-webkit-touch-callout: none) {
-    .shell { padding-bottom: 76px; }
+    .main { padding-bottom: calc(180px + env(safe-area-inset-bottom)); }
+    .bottom-nav { bottom: 76px; }
     .toast { bottom: calc(162px + env(safe-area-inset-bottom)); }
   }
 }
