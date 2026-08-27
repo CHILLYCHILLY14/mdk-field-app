@@ -34,10 +34,9 @@ Then open `http://localhost:4173`.
 ## Publish with GitHub Pages
 
 1. Create a GitHub repository named `mdk-field-app` and place these files on its `main` branch.
-2. Open **Settings → Pages** in GitHub.
-3. Under **Build and deployment**, select **GitHub Actions**.
-4. Push to `main` or run **Deploy to GitHub Pages** from the Actions tab.
-5. The expected address is `https://CHILLYCHILLY14.github.io/mdk-field-app/`.
+2. Push to `main` or run **Deploy to GitHub Pages** from the Actions tab.
+3. The workflow enables GitHub Pages and publishes the site automatically.
+4. The expected address is `https://CHILLYCHILLY14.github.io/mdk-field-app/`.
 
 The included workflow validates the JavaScript and publishes the static app.
 
